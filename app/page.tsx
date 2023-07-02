@@ -1,4 +1,4 @@
-import { client } from "@/src/lib/client"
+import { client } from "@/src/libs/client"
 import type { Blog } from "@/src/types/microcms/blog"
 
 export default async function Home() {
