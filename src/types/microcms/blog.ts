@@ -1,10 +1,10 @@
 export type Blog = {
-    id: string
-    title: string
-    content: string
-    category?: Category
-}
+  id: string;
+  title: string;
+  content: string;
+  category?: Category;
+};
 
 export type Category = {
-    name: string
-}
+  name: string;
+};

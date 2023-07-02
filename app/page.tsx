@@ -1,13 +1,13 @@
-import { client } from "@/src/libs/client"
-import type { Blog } from "@/src/types/microcms/blog"
+import type { Blog } from '@/src/types/microcms/blog';
+import { client } from '@/src/libs/client';
 
 export default async function Home() {
   const response = await client.getList<Blog>({
-    endpoint: "blogs",
+    endpoint: 'blogs',
     customRequestInit: {
-      cache: "no-store"
-    }
-  })
+      cache: 'no-store',
+    },
+  });
 
   return (
     <main>
@@ -19,5 +19,5 @@ export default async function Home() {
         </div>
       ))}
     </main>
-  )
+  );
 }
