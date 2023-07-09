@@ -1,5 +1,5 @@
-import type { Blog } from '@/src/types/microcms/blog';
-import { client } from '@/src/libs/client';
+import type { Blog } from '@/types/microcms/blog';
+import { client } from '@/libs/client';
 
 export default async function Home() {
   const response = await client.getList<Blog>({
