@@ -33,7 +33,7 @@ export default async function Home({
   const dehydratedState = dehydrate(queryClient);
 
   return (
-    <main className='container mx-auto'>
+    <main className='container mx-auto lg:w-4/5 xl:w-3/5'>
       <Hydrate state={dehydratedState}>
         <BlogContent blogId={params.blogId} />
       </Hydrate>

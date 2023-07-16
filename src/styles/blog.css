@@ -8,14 +8,15 @@
       @apply border-b border-accent p-1;
     }
 
-    /* 埋め込みURL */
-    div.iframely-embed {
-      @apply mx-auto lg:w-4/5 xl:w-3/5;
+    /* 埋め込みURL, 画像 */
+    div.iframely-embed,
+    img {
+      @apply mx-auto w-4/5;
     }
 
     /* コードブロック */
     pre {
-      @apply mockup-window mx-auto border bg-neutral pb-4 pt-4 sm:px-4 md:p-6 lg:w-4/5 xl:w-3/5;
+      @apply mockup-window mx-auto border bg-neutral pb-4 pt-4 sm:px-4 md:p-6;
 
       code {
         @apply block w-auto rounded-md p-4;
