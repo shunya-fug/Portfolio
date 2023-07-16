@@ -1,41 +1,42 @@
-import { client } from '@/libs/client';
-import type { Blog } from '@/types/microcms/blog';
-import { load } from 'cheerio';
-import hljs from 'highlight.js';
+import getQueryClient from '@/libs/getQueryClient';
+import { Hydrate, dehydrate } from '@tanstack/react-query';
+import BlogContent from './content';
 
-export default async function Home({ params }: { params: { blogId: string } }) {
-  const response = await client.get<Blog>({
-    endpoint: 'blogs',
-    contentId: params.blogId,
-    customRequestInit: {
-      cache: 'no-store',
-    },
-  });
+/**
+ * ブログ取得関数
+ *
+ * @param blogId ブログID
+ *
+ * @returns ブログデータ
+ */
+async function getBlog(blogId: string) {
+  return await fetch(`http://localhost:3000/api/blog/${blogId}`).then((res) => res.json());
+}
 
-  const $ = load(response.content);
-  // コードブロックのシンタックスハイライト処理
-  $('pre code').each((_, elm) => {
-    const language = $(elm).attr('class')?.replace('language-', '');
-    const result = language
-      ? hljs.highlight($(elm).text(), { language })
-      : hljs.highlightAuto($(elm).text());
-    $(elm).html(result.value);
-    $(elm).addClass('hljs');
-  });
-  // コードブロックのファイル名が入力されている場合の処理
-  $('div[data-filename]').each((_, elm) => {
-    // data-filename属性の値を持つspanを追加
-    $(elm)
-      .children('pre')
-      .prepend(`<span>${$(elm).data('filename')}</span>`);
-  });
+/**
+ * ブログページ
+ *
+ * @param params.blogId ブログID
+ *
+ * @see https://tanstack.com/query/v4/docs/react/guides/ssr#using-hydrate
+ */
+export default async function Home({
+  params,
+}: {
+  params: {
+    /** ブログID */
+    blogId: string;
+  };
+}) {
+  const queryClient = getQueryClient();
+  await queryClient.prefetchQuery(['blog', params.blogId], () => getBlog(params.blogId));
+  const dehydratedState = dehydrate(queryClient);
 
   return (
     <main className='container mx-auto'>
-      <article>
-        <h1 className='break-all text-center'>{response.title}</h1>
-        <div className='blog-content' dangerouslySetInnerHTML={{ __html: $.html() }} />
-      </article>
+      <Hydrate state={dehydratedState}>
+        <BlogContent blogId={params.blogId} />
+      </Hydrate>
     </main>
   );
 }

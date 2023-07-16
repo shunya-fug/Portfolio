@@ -1,17 +1,11 @@
-import { client } from '@/libs/client';
-import type { Blog } from '@/types/microcms/blog';
+import { Blog } from '@/types/microcms/blog';
+import { MicroCMSListResponse } from 'microcms-js-sdk';
 import Link from 'next/link';
 
 export default async function Home() {
-  const response = await client.getList<Blog>({
-    endpoint: 'blogs',
-    queries: {
-      fields: ['id', 'publishedAt', 'title', 'subtitle', 'category'],
-    },
-    customRequestInit: {
-      cache: 'no-store',
-    },
-  });
+  const response: MicroCMSListResponse<Blog> = await fetch(`http://localhost:3000/api/blog`).then(
+    (res) => res.json(),
+  );
 
   return (
     <main className='mx-auto w-96 columns-1 gap-5'>
