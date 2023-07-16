@@ -3,9 +3,9 @@ import { MicroCMSListResponse } from 'microcms-js-sdk';
 import Link from 'next/link';
 
 export default async function Home() {
-  const response: MicroCMSListResponse<Blog> = await fetch(`http://localhost:3000/api/blog`).then(
-    (res) => res.json(),
-  );
+  const response: MicroCMSListResponse<Blog> = await fetch(
+    `${process.env.API_BASE_URL}/api/blog`,
+  ).then((res) => res.json());
 
   return (
     <main className='mx-auto w-96 columns-1 gap-5'>

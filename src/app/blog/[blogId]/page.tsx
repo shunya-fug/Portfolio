@@ -10,7 +10,7 @@ import BlogContent from './content';
  * @returns ブログデータ
  */
 async function getBlog(blogId: string) {
-  return await fetch(`http://localhost:3000/api/blog/${blogId}`).then((res) => res.json());
+  return await fetch(`${process.env.API_BASE_URL}/api/blog/${blogId}`).then((res) => res.json());
 }
 
 /**
