@@ -5,9 +5,6 @@ import hljs from 'highlight.js';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(_request: NextRequest, { params }: { params: { blogId: string } }) {
-  if (!params.blogId) {
-    return NextResponse.json({ error: 'blogId is required' }, { status: 400 });
-  }
   const response = await client.get<Blog>({
     endpoint: 'blogs',
     contentId: params.blogId,

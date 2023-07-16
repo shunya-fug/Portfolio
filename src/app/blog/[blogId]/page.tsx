@@ -1,6 +1,7 @@
 import getQueryClient from '@/libs/getQueryClient';
 import { Hydrate, dehydrate } from '@tanstack/react-query';
 import BlogContent from './content';
+import { getBaseUrl } from '@/libs/getBaseUrl'
 
 /**
  * ブログ取得関数
@@ -10,9 +11,7 @@ import BlogContent from './content';
  * @returns ブログデータ
  */
 async function getBlog(blogId: string) {
-  return await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/blog/${blogId}`).then((res) =>
-    res.json(),
-  );
+  return await fetch(`${getBaseUrl()}/api/blog/${blogId}`).then((res) => res.json());
 }
 
 /**
