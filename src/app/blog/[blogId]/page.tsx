@@ -1,7 +1,7 @@
+import { getBaseUrl } from '@/libs/getBaseUrl';
 import getQueryClient from '@/libs/getQueryClient';
 import { Hydrate, dehydrate } from '@tanstack/react-query';
 import BlogContent from './content';
-import { getBaseUrl } from '@/libs/getBaseUrl'
 
 /**
  * ブログ取得関数
@@ -34,7 +34,7 @@ export default async function Home({
   const dehydratedState = dehydrate(queryClient);
 
   return (
-    <main className='container mx-auto lg:w-4/5 xl:w-3/5'>
+    <main className='container mx-auto pt-8 lg:w-4/5 xl:w-3/5'>
       <Hydrate state={dehydratedState}>
         <BlogContent blogId={params.blogId} />
       </Hydrate>

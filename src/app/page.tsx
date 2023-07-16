@@ -4,12 +4,12 @@ export default async function Home() {
   return (
     <main className='container mx-auto lg:w-4/5 xl:w-3/5'>
       <article>
-        <h1 className='text-center'>Fuji's Portfolio.</h1>
+        <h1 className='mt-8 text-center'>Fuji's Portfolio.</h1>
         <section className='text-center'>
           <h2>Gallery</h2>
           <p>成果物一覧です。</p>
-          <section className='mx-auto w-4/5 columns-2 gap-8'>
-            <Link href='/blog'>
+          <section className='mx-auto w-4/5 columns-1 gap-8 sm:columns-2'>
+            <Link href='/blog' className='no-underline'>
               <div className='card image-full break-inside-avoid-column shadow'>
                 <figure className='m-0'>
                   <img src='https://source.unsplash.com/jLwVAUtLOAQ' alt='Blog image' />
