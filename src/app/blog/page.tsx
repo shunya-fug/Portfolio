@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default async function Home() {
   const response: MicroCMSListResponse<Blog> = await fetch(
-    `${process.env.API_BASE_URL}/api/blog`,
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/blog`,
   ).then((res) => res.json());
 
   return (

@@ -10,7 +10,9 @@ import BlogContent from './content';
  * @returns ブログデータ
  */
 async function getBlog(blogId: string) {
-  return await fetch(`${process.env.API_BASE_URL}/api/blog/${blogId}`).then((res) => res.json());
+  return await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/blog/${blogId}`).then((res) =>
+    res.json(),
+  );
 }
 
 /**
