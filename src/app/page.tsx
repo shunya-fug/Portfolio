@@ -1,23 +1,49 @@
-import type { Blog } from '@/types/microcms/blog';
-import { client } from '@/libs/client';
+import Link from 'next/link';
 
 export default async function Home() {
-  const response = await client.getList<Blog>({
-    endpoint: 'blogs',
-    customRequestInit: {
-      cache: 'no-store',
-    },
-  });
-
   return (
-    <main>
-      {response.contents.map((blog) => (
-        <div key={blog.id}>
-          <h1>{blog.title}</h1>
-          <p>{blog.publishedAt}</p>
-          <p>{blog.category && blog.category.name}</p>
-        </div>
-      ))}
+    <main className='container mx-auto lg:w-4/5 xl:w-3/5'>
+      <article>
+        <h1 className='text-center'>Fuji's Portfolio.</h1>
+        <section className='text-center'>
+          <h2>Gallery</h2>
+          <p>成果物一覧です。</p>
+          <section className='mx-auto w-4/5 columns-2 gap-8'>
+            <Link href='/blog'>
+              <div className='card image-full break-inside-avoid-column shadow'>
+                <figure className='m-0'>
+                  <img src='https://source.unsplash.com/jLwVAUtLOAQ' alt='Blog image' />
+                </figure>
+                <div className='card-body text-left'>
+                  <h3 className='card-title mt-auto text-gray-200'>Blog</h3>
+                  <div>
+                    <p className='m-0'>不定期で更新しています。</p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+            <div className='card image-full break-inside-avoid-column shadow'>
+              <figure className='m-0'>
+                <img src='https://source.unsplash.com/tE3D-Slk5EM' alt='Blog image' />
+              </figure>
+              <div className='card-body text-left'>
+                <h3 className='card-title mt-auto text-gray-200'>作成中...</h3>
+              </div>
+            </div>
+          </section>
+        </section>
+        <section className='text-center'>
+          <h2>Skill</h2>
+          <p>出来ること一覧です。</p>
+        </section>
+        <section className='text-center'>
+          <h2>Profile</h2>
+        </section>
+        <section className='text-center'>
+          <h2>Tech</h2>
+          <p>使用技術一覧です。</p>
+        </section>
+      </article>
     </main>
   );
 }
