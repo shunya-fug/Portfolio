@@ -14,7 +14,7 @@ export type Portfolio = {
 export type Gallery = {
   title: string;
   description?: string;
-  image?: Image;
+  image: Image;
   url?: string;
 };
 
