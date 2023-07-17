@@ -1,0 +1,41 @@
+@layer components {
+  .blog-content {
+    h1 {
+      @apply rounded-t p-3 shadow shadow-accent [&:not(:first-child)]:mt-12;
+    }
+
+    h2 {
+      @apply border-b border-accent p-1;
+    }
+
+    /* 埋め込みURL, 画像 */
+    div.iframely-embed,
+    img {
+      @apply mx-auto w-4/5;
+    }
+
+    /* コードブロック */
+    pre {
+      @apply mockup-window mx-auto border bg-neutral pb-4 pt-4 sm:px-4 md:p-6;
+
+      code {
+        @apply block w-auto rounded-md p-4;
+      }
+    }
+
+    /* コードブロック（ファイル名あり） */
+    div[data-filename] > pre {
+      @apply relative;
+
+      /* コードの右上にファイル名表示 */
+      > span {
+        @apply absolute right-4 inline-block -translate-y-full rounded-t-sm bg-neutral-700 px-2 text-center md:right-6;
+      }
+
+      /* コードの右上の角の丸め設定を無くす */
+      code {
+        @apply rounded-tr-none;
+      }
+    }
+  }
+}
