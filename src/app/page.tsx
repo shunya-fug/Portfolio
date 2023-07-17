@@ -1,4 +1,5 @@
 import SkillRating from '@/components/SkillRating';
+import Technology from '@/components/Technology';
 import { clientPortfolio } from '@/libs/client';
 import { Portfolio } from '@/types/microcms/portfolio';
 import Link from 'next/link';
@@ -22,16 +23,14 @@ export default async function Home() {
             {portfolio.gallery.map((gallery) => {
               const content = (
                 <div className='card image-full break-inside-avoid-column shadow'>
-                  {gallery.image && (
-                    <figure className='m-0'>
-                      <img src={gallery.image.url} alt='Blog image' />
-                    </figure>
-                  )}
+                  <figure className='m-0'>
+                    <img src={gallery.image.url} alt='Blog image' />
+                  </figure>
                   <div className='card-body text-left'>
                     <h3 className='card-title mt-auto text-gray-200'>{gallery.title}</h3>
                     {gallery.description && (
                       <div>
-                        <p className='m-0'>不定期で更新しています。</p>
+                        <p className='m-0'>{gallery.description}</p>
                       </div>
                     )}
                   </div>
@@ -77,48 +76,10 @@ export default async function Home() {
             return (
               <>
                 <h3>{skill.category}</h3>
-                <div className='columns-3 gap-4 sm:columns-4 md:columns-5'>
-                  {skill.tech.map((tech) => {
-                    const item = (
-                      <div className='break-inside-avoid-column'>
-                        <img
-                          src={tech.icon.url}
-                          alt={tech.name}
-                          className='mx-auto my-0 h-[100px] w-[100px] p-4'
-                        />
-                        <b>{tech.name}</b>
-                        <br />
-                        <SkillRating id={tech.id} rate={tech.rating} />
-                        {/* <div className='rating rating-sm'>
-                          {Array.from({ length: 5 }).map((_, i) => (
-                            <input
-                              type='radio'
-                              name={`rating-${tech.id}`}
-                              id={`rating-${tech.id}-${i}`}
-                              className='mask mask-star-2 bg-orange-300'
-                              checked={i + 1 === tech.rating}
-                              readOnly
-                            />
-                          ))}
-                        </div> */}
-                      </div>
-                    );
-
-                    return tech.url ? (
-                      <Link
-                        id={`skill-${tech.id}`}
-                        href={tech.url}
-                        key={tech.id}
-                        className='no-underline'
-                        target='_blank'
-                        rel='noopener noreferrer'
-                      >
-                        {item}
-                      </Link>
-                    ) : (
-                      item
-                    );
-                  })}
+                <div className='grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5'>
+                  {skill.tech.map((tech) => (
+                    <Technology tech={tech} showRating />
+                  ))}
                 </div>
               </>
             );
@@ -131,34 +92,10 @@ export default async function Home() {
         <section className='text-center'>
           <h2>Tech</h2>
           <p>使用技術一覧です。</p>
-          <div className='columns-3 gap-4 sm:columns-4 md:columns-5'>
-            {portfolio.tech.map((tech) => {
-              const item = (
-                <div className='break-inside-avoid-column'>
-                  <img
-                    src={tech.icon.url}
-                    alt={tech.name}
-                    className='mx-auto my-0 h-[100px] w-[100px] p-4'
-                  />
-                  <b>{tech.name}</b>
-                </div>
-              );
-
-              return tech.url ? (
-                <Link
-                  id={`tech-${tech.id}`}
-                  href={tech.url}
-                  key={tech.id}
-                  className='no-underline'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  {item}
-                </Link>
-              ) : (
-                item
-              );
-            })}
+          <div className='grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5'>
+            {portfolio.tech.map((tech) => (
+              <Technology tech={tech} />
+            ))}
           </div>
         </section>
       </article>
