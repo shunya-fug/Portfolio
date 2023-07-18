@@ -19,7 +19,7 @@ export default async function Home() {
         <section className='text-center'>
           <h2>Gallery</h2>
           <p>成果物一覧です。</p>
-          <section className='mx-auto w-4/5 columns-1 gap-8 sm:columns-2'>
+          <section className='mx-auto grid w-4/5 grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-8'>
             {portfolio.gallery.map((gallery) => {
               const content = (
                 <div className='card image-full break-inside-avoid-column shadow'>
