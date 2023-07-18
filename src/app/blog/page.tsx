@@ -14,9 +14,9 @@ export default async function Home() {
   });
 
   return (
-    <main className='container mx-auto pt-8 lg:w-4/5 xl:w-3/5'>
+    <main className='container mx-auto py-8 lg:w-4/5 xl:w-3/5'>
       <h1 className='text-center'>記事一覧</h1>
-      <div className='gap-8 gap-y-4 md:columns-2 lg:columns-3'>
+      <div className='grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2 lg:grid-cols-3'>
         {response.contents.map((blog) => (
           <Link key={blog.id} href={`/blog/${blog.id}`} className='no-underline'>
             <div key={blog.id} className='card break-inside-avoid-column rounded-md shadow-md'>
