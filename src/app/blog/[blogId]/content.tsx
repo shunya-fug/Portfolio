@@ -29,10 +29,6 @@ export default function BlogContent({
     getBlog(blogId),
   );
 
-  if (isLoading || isFetching) {
-    return <p>Loading...</p>;
-  }
-
   if (error) {
     return <p>Error</p>;
   }
